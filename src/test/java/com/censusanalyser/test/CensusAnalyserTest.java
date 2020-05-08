@@ -55,4 +55,16 @@ public class CensusAnalyserTest {
             Assert.assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM,e.type);
         }
     }
+
+    //TC-1.4
+    @Test
+    public void givenStateCensusData_WhenWithWrongDelimiter_ShouldThrowException() {
+        try {
+            ExpectedException exceptionRule = ExpectedException.none();
+            exceptionRule.expect(CensusAnalyserException.class);
+            censusAnalyser.loadIndiaCensusData(WRONG_DELIMITER);
+        } catch (CensusAnalyserException e) {
+            Assert.assertEquals(CensusAnalyserException.ExceptionType.CSV_FILE_INTERNAL_ISSUES, e.type);
+        }
+    }
 }
