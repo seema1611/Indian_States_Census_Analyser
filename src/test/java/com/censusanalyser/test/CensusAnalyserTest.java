@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import static com.censusanalyser.analyse.ConstantPaths.*;
-import static com.censusanalyser.analyse.ConstantPaths.WRONG_HEADER_CODE_FILE;
 
 public class CensusAnalyserTest {
     //Objects
@@ -23,8 +22,7 @@ public class CensusAnalyserTest {
     //TC-1.1
     @Test
     public void givenFilePath_WhenNoOfRecordMatches_ShouldReturnTrue() {
-        try
-        {
+        try {
             int numOfRecords = censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_FILE_PATH);
             Assert.assertEquals(29,numOfRecords);
         } catch (CensusAnalyserException e) {
@@ -67,7 +65,7 @@ public class CensusAnalyserTest {
             exceptionRule.expect(CensusAnalyserException.class);
             censusAnalyser.loadIndiaCensusData(WRONG_DELIMITER);
         } catch (CensusAnalyserException e) {
-            Assert.assertEquals(CensusAnalyserException.ExceptionType.CSV_FILE_INTERNAL_ISSUES, e.type);
+            Assert.assertEquals(CensusAnalyserException.ExceptionType.CSV_FILE_INTERNAL_ISSUES,e.type);
         }
     }
 
@@ -78,7 +76,7 @@ public class CensusAnalyserTest {
         {
             censusAnalyser.loadIndiaCensusData(WRONG_HEADER);
         } catch (CensusAnalyserException e) {
-            Assert.assertEquals(CensusAnalyserException.ExceptionType.CSV_FILE_INTERNAL_ISSUES, e.type);
+            Assert.assertEquals(CensusAnalyserException.ExceptionType.CSV_FILE_INTERNAL_ISSUES,e.type);
         }
     }
 
@@ -125,6 +123,17 @@ public class CensusAnalyserTest {
         try
         {
             censusAnalyser.loadIndianStateCode(WRONG_DELIMITER_CODE_FILE);
+        } catch (CensusAnalyserException e) {
+            Assert.assertEquals( CensusAnalyserException.ExceptionType.CSV_FILE_INTERNAL_ISSUES, e.type );
+        }
+    }
+
+    //TC-2.5
+    @Test
+    public void givenIndianStateCodeData_WithIncorrectHeader_Should_ReturnException() {
+        try
+        {
+            censusAnalyser.loadIndianStateCode(WRONG_HEADER_CODE_FILE);
         } catch (CensusAnalyserException e) {
             Assert.assertEquals( CensusAnalyserException.ExceptionType.CSV_FILE_INTERNAL_ISSUES, e.type );
         }
