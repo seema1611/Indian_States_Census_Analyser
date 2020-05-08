@@ -42,4 +42,17 @@ public class CensusAnalyserTest {
             Assert.assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM,e.type);
         }
     }
+
+    //TC-1.3
+    @Test
+    public void givenStateCensusData_WhenWithWrongType_ShouldThrowException() {
+        try
+        {
+            ExpectedException exceptionRule = ExpectedException.none();
+            exceptionRule.expect(CensusAnalyserException.class);
+            censusAnalyser.loadIndiaCensusData(WRONG_CSV_FILE_TYPE);
+        } catch (CensusAnalyserException e) {
+            Assert.assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM,e.type);
+        }
+    }
 }
