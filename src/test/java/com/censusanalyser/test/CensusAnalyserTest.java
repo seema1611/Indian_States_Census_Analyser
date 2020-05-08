@@ -78,4 +78,17 @@ public class CensusAnalyserTest {
             Assert.assertEquals(CensusAnalyserException.ExceptionType.CSV_FILE_INTERNAL_ISSUES, e.type);
         }
     }
+
+    //UseCase-2
+    //TC-2.1
+    @Test
+    public void givenFilePathOfStateCode_WhenNoOfRecordMatches_ThenReturnTrue() {
+        try
+        {
+            int numOfStateCode = censusAnalyser.loadIndianStateCode(INDIA_STATE_CODE_FILE_PATH);
+            Assert.assertEquals("37",numOfStateCode);
+        } catch (CensusAnalyserException e) {
+            e.printStackTrace();
+        }
+    }
 }
