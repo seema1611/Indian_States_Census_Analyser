@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import static com.censusanalyser.analyse.ConstantPaths.*;
+import static com.censusanalyser.analyse.ConstantPaths.WRONG_HEADER_CODE_FILE;
 
 public class CensusAnalyserTest {
     //Objects
@@ -22,7 +23,8 @@ public class CensusAnalyserTest {
     //TC-1.1
     @Test
     public void givenFilePath_WhenNoOfRecordMatches_ShouldReturnTrue() {
-        try {
+        try
+        {
             int numOfRecords = censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_FILE_PATH);
             Assert.assertEquals(29,numOfRecords);
         } catch (CensusAnalyserException e) {
@@ -59,7 +61,8 @@ public class CensusAnalyserTest {
     //TC-1.4
     @Test
     public void givenStateCensusData_WhenWithWrongDelimiter_ShouldThrowException() {
-        try {
+        try
+        {
             ExpectedException exceptionRule = ExpectedException.none();
             exceptionRule.expect(CensusAnalyserException.class);
             censusAnalyser.loadIndiaCensusData(WRONG_DELIMITER);
@@ -71,7 +74,8 @@ public class CensusAnalyserTest {
     //TC-1.5
     @Test
     public void givenStateCensusData_WhenWithWrongHeader_ShouldThrowException() {
-        try {
+        try
+        {
             censusAnalyser.loadIndiaCensusData(WRONG_HEADER);
         } catch (CensusAnalyserException e) {
             Assert.assertEquals(CensusAnalyserException.ExceptionType.CSV_FILE_INTERNAL_ISSUES, e.type);
@@ -112,6 +116,17 @@ public class CensusAnalyserTest {
             censusAnalyser.loadIndianStateCode(WRONG_CODE_CSV_FILE_TYPE);
         } catch (CensusAnalyserException e) {
             Assert.assertEquals( CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM, e.type );
+        }
+    }
+
+    //TC-2.4
+    @Test
+    public void givenIndianStateCodeData_WithIncorrectDelimiter_Should_ReturnException() {
+        try
+        {
+            censusAnalyser.loadIndianStateCode(WRONG_DELIMITER_CODE_FILE);
+        } catch (CensusAnalyserException e) {
+            Assert.assertEquals( CensusAnalyserException.ExceptionType.CSV_FILE_INTERNAL_ISSUES, e.type );
         }
     }
 }

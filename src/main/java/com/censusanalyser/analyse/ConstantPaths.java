@@ -12,4 +12,5 @@ public class ConstantPaths {
     public static final String INDIA_STATE_CODE_FILE_PATH = "./src/test/resources/IndiaStateCode.csv";
     public static final String WRONG_CODE_CSV_FILE_PATH="./src/main/resources/IndiaStateCode.csv";
     public static final String WRONG_CODE_CSV_FILE_TYPE = "./src/test/resources/IndiaStateCode.txt";
+    public static final String WRONG_DELIMITER_CODE_FILE="./src/test/resources/WrongCodeDelimiter.csv";
 }
