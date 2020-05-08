@@ -1,6 +1,7 @@
 package com.censusanalyser.test;
 
 import com.censusanalyser.analyse.CensusAnalyser;
+import com.censusanalyser.exception.CSVBuilderException;
 import com.censusanalyser.exception.CensusAnalyserException;
 import org.junit.Assert;
 import org.junit.Before;
@@ -113,7 +114,7 @@ public class CensusAnalyserTest {
         {
             censusAnalyser.loadIndianStateCode(WRONG_CODE_CSV_FILE_TYPE);
         } catch (CensusAnalyserException e) {
-            Assert.assertEquals( CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM, e.type );
+            Assert.assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM, e.type );
         }
     }
 
