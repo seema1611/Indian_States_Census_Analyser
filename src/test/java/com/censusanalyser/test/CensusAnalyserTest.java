@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import static com.censusanalyser.analyse.ConstantPaths.*;
-import static com.censusanalyser.analyse.ConstantPaths.WRONG_HEADER;
 
 public class CensusAnalyserTest {
     //Objects
@@ -100,6 +99,17 @@ public class CensusAnalyserTest {
             ExpectedException exceptionRule = ExpectedException.none();
             exceptionRule.expect( CensusAnalyserException.class );
             censusAnalyser.loadIndianStateCode(WRONG_CODE_CSV_FILE_PATH);
+        } catch (CensusAnalyserException e) {
+            Assert.assertEquals( CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM, e.type );
+        }
+    }
+
+    //TC-2.3
+    @Test
+    public void givenIndianStateCode_WithWrongFileType_Should_ReturnException() {
+        try
+        {
+            censusAnalyser.loadIndianStateCode(WRONG_CODE_CSV_FILE_TYPE);
         } catch (CensusAnalyserException e) {
             Assert.assertEquals( CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM, e.type );
         }
