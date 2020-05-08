@@ -6,4 +6,5 @@ public class ConstantPaths {
     public static final String WRONG_CSV_FILE_PATH = "./src/main/resources/IndiaStateCensusData.csv";
     public static final String WRONG_CSV_FILE_TYPE = "./src/main/resources/IndiaStateCensusData.txt";
     public static final String WRONG_DELIMITER = "./src/test/resources/WrongData.csv";
+    public static final String WRONG_HEADER = "./src/test/resources/WrongHeader.csv";
 }

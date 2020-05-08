@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import static com.censusanalyser.analyse.ConstantPaths.*;
+import static com.censusanalyser.analyse.ConstantPaths.WRONG_HEADER;
 
 public class CensusAnalyserTest {
     //Objects
@@ -63,6 +64,16 @@ public class CensusAnalyserTest {
             ExpectedException exceptionRule = ExpectedException.none();
             exceptionRule.expect(CensusAnalyserException.class);
             censusAnalyser.loadIndiaCensusData(WRONG_DELIMITER);
+        } catch (CensusAnalyserException e) {
+            Assert.assertEquals(CensusAnalyserException.ExceptionType.CSV_FILE_INTERNAL_ISSUES, e.type);
+        }
+    }
+
+    //TC-1.5
+    @Test
+    public void givenStateCensusData_WhenWithWrongHeader_ShouldThrowException() {
+        try {
+            censusAnalyser.loadIndiaCensusData(WRONG_HEADER);
         } catch (CensusAnalyserException e) {
             Assert.assertEquals(CensusAnalyserException.ExceptionType.CSV_FILE_INTERNAL_ISSUES, e.type);
         }
