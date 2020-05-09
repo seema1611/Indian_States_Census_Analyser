@@ -78,6 +78,7 @@ public class CensusAnalyser {
         return sortedStateCensusJson;
     }
 
+    //Sorting method
     private void sortIntegerValues(Comparator<IndiaCensusDAO> censusComparator) {
         for (int i = 0; i < censusList.size() - 1; i++) {
             for (int j = 0; j < censusList.size() - i - 1; j++) {
@@ -102,6 +103,7 @@ public class CensusAnalyser {
         return sortedStateCensusJson;
     }
 
+    //Sorting method
     private void sortStringValue(Comparator<IndiaCensusDAO> censusComparator) {
         for (int i = 0; i < censusList.size() - 1; i++) {
             for (int j = 0; j < censusList.size() - i - 1; j++) {
