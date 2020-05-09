@@ -1,8 +1,8 @@
-package com.censusanalyser.analyse;
+package com.censusanalyser.adapter;
 
-import com.censusanalyser.dao.CSVFieldSorter;
 import com.censusanalyser.dao.IndiaCensusDAO;
 import com.censusanalyser.exception.CensusAnalyserException;
+import com.censusanalyser.model.IndiaCensusCSV;
 import com.censusanalyser.model.IndiaStateCodeCSV;
 import com.censusanalyser.opencsv.CSVBuilderFactory;
 import com.censusanalyser.opencsv.ICSVBuilder;
@@ -15,27 +15,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CensusLoader {
+public class IndiaCensusAdapter extends CensusAdapter {
     Map<String, IndiaCensusDAO> censusMap = new HashMap<>();
 
-    public <E> Map<String, IndiaCensusDAO> loadCensusData(Class<E> censusClass,
-                                                     String... csvFilePath) throws CensusAnalyserException {
-        try {
-            Reader reader = Files.newBufferedReader( Paths.get( csvFilePath[0] ) );
-            ICSVBuilder csvBuilderInterface = CSVBuilderFactory.createCSVBuilder();
-            List<E> csvList = csvBuilderInterface.getCSVFileList( reader, censusClass );
-            csvList.forEach( (censusCSV) -> new CSVFieldSorter().getCensusObject( censusClass,
-                    censusMap, censusCSV ) );
-            if (csvFilePath.length == 1) return censusMap;
-            this.loadIndianStateCode( censusMap, csvFilePath[1] );
-            return censusMap;
-        } catch (RuntimeException e) {
-            throw new CensusAnalyserException( e.getMessage(),
-                    CensusAnalyserException.ExceptionType.CSV_FILE_INTERNAL_ISSUES );
-        } catch (IOException e) {
-            throw new CensusAnalyserException( e.getMessage(),
-                    CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM );
-        }
+    @Override
+    public Map<String, IndiaCensusDAO> loadCensusData(String... csvFilePath) throws CensusAnalyserException {
+        Map<String, IndiaCensusDAO> censusMap = super.loadCensusData( IndiaCensusCSV.class, csvFilePath[0] );
+        this.loadIndianStateCode( censusMap, csvFilePath[1] );
+        return censusMap;
     }
 
     public int loadIndianStateCode(Map<String, IndiaCensusDAO> censusMap,

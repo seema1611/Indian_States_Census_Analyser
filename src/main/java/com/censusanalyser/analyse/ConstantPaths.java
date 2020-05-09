@@ -17,4 +17,8 @@ public class ConstantPaths {
 
     //US Data
     public static final String US_CENSUS_CSV_FILE_PATH = "./src/test/resources/USCensusData.csv";
+
+    public enum Country {
+        INDIA, US
+    }
 }

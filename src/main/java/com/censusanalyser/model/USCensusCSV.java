@@ -19,7 +19,14 @@ public class USCensusCSV {
     public double populationDensity;
 
     public USCensusCSV() {
+    }
 
+    public USCensusCSV(String state, String stateCode, int population, double populationDensity, double totalArea) {
+        this.state = state;
+        this.population = population;
+        this.stateId = stateCode;
+        this.populationDensity = populationDensity;
+        this.totalArea = totalArea;
     }
 
     @Override

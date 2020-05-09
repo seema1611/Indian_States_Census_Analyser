@@ -1,5 +1,6 @@
 package com.censusanalyser.dao;
 
+import com.censusanalyser.analyse.ConstantPaths;
 import com.censusanalyser.model.IndiaCensusCSV;
 import com.censusanalyser.model.IndiaStateCodeCSV;
 import com.censusanalyser.model.USCensusCSV;
@@ -29,5 +30,11 @@ public class IndiaCensusDAO {
         population = usCensusCSV.population;
         populationDensity = usCensusCSV.populationDensity;
         stateCode = usCensusCSV.stateId;
+    }
+
+    public Object getCensusDTO(ConstantPaths.Country country) {
+        if(country.equals( ConstantPaths.Country.INDIA ))
+            return new IndiaCensusCSV(state,population,(int)populationDensity,(int)totalArea);
+        return new USCensusCSV(state,stateCode,population,populationDensity,totalArea);
     }
 }
