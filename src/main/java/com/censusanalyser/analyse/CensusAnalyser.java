@@ -4,16 +4,10 @@ import com.censusanalyser.dao.CSVFieldSorter;
 import com.censusanalyser.dao.IndiaCensusDAO;
 import com.censusanalyser.exception.CensusAnalyserException;
 import com.censusanalyser.model.IndiaCensusCSV;
-import com.censusanalyser.model.IndiaStateCodeCSV;
 import com.censusanalyser.model.USCensusCSV;
-import com.censusanalyser.opencsv.CSVBuilderFactory;
-import com.censusanalyser.opencsv.ICSVBuilder;
+
 import com.google.gson.Gson;
 
-import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
 
 public class CensusAnalyser {
@@ -21,38 +15,19 @@ public class CensusAnalyser {
     Map<String, IndiaCensusDAO> censusMap;
 
     public CensusAnalyser() {
-        this.censusList = new ArrayList<>();
-        this.censusMap = new HashMap<>();
+
     }
 
-    public int loadIndiaCensusData(String csvFilePath) throws CensusAnalyserException {
-        return this.loadCensusData( csvFilePath, IndiaCensusCSV.class );
-    }
-
-    public int loadIndianStateCode(String csvFilePath) throws CensusAnalyserException {
-        return this.loadCensusData( csvFilePath, IndiaStateCodeCSV.class );
+    public int loadIndiaCensusData(String... csvFilePath) throws CensusAnalyserException {
+        censusMap=new  CensusLoader().loadCensusData( IndiaCensusCSV.class,csvFilePath );
+        return censusMap.size();
     }
 
     public int loadUSCodeData(String csvFilePath) throws CensusAnalyserException {
-        return this.loadCensusData( csvFilePath, USCensusCSV.class );
+        censusMap= new CensusLoader().loadCensusData(  USCensusCSV.class ,csvFilePath);
+        return censusMap.size();
     }
 
-    public <E> int loadCensusData(String csvFilePath, Class<E> censusClass) throws CensusAnalyserException {
-        try {
-            Reader reader = Files.newBufferedReader( Paths.get( csvFilePath ) );
-            ICSVBuilder csvBuilderInterface = CSVBuilderFactory.createCSVBuilder();
-            List<E> csvList = csvBuilderInterface.getCSVFileList( reader, censusClass );
-            csvList.forEach( (censusCSV) -> new CSVFieldSorter().getCensusObject( censusClass, censusMap, censusCSV ) );
-            censusList = new ArrayList( censusMap.values() );
-            return censusList.size();
-        } catch (RuntimeException e) {
-            throw new CensusAnalyserException( e.getMessage(),
-                    CensusAnalyserException.ExceptionType.CSV_FILE_INTERNAL_ISSUES);
-        } catch (IOException e) {
-            throw new CensusAnalyserException( e.getMessage(),
-                    CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM );
-        }
-    }
 
     public String getStateWiseCensusData(String fieldType) throws CensusAnalyserException {
         if (censusMap == null || censusMap.size() == 0) {
