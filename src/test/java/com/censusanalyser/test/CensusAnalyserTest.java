@@ -175,27 +175,6 @@ public class CensusAnalyserTest {
         Assert.assertEquals( "West Bengal", censusCSV[censusCSV.length - 1].state );
     }
 
-    /*//UC-4
-    //TC-4.1
-    @Test
-    public void givenIndianStateCodeData_WhenSortedOnState_ShouldReturnStartSortedResult() throws CensusAnalyserException {
-        censusAnalyser.loadIndiaCensusData( ConstantPaths.INDIA_STATE_CODE_FILE_PATH );
-        String sortedCensusData = censusAnalyser.getStateWiseCensusData("stateCode");
-        IndiaStateCodeCSV[] censusCSV = new Gson().fromJson( sortedCensusData, IndiaStateCodeCSV[].class );
-        Collections.reverse( Arrays.asList(censusCSV));
-        Assert.assertEquals( "AN", censusCSV[0].stateCode );
-    }
-
-    //TC-4.2
-    @Test
-    public void givenIndianStateCodeData_WhenSortedOnState_ShouldReturnEndSortedResult() throws CensusAnalyserException {
-        censusAnalyser.loadIndiaCensusData( ConstantPaths.INDIA_STATE_CODE_FILE_PATH );
-        String sortedCensusData = censusAnalyser.getStateWiseCensusData("stateCode");
-        IndiaStateCodeCSV[] censusCSV = new Gson().fromJson( sortedCensusData, IndiaStateCodeCSV[].class );
-        Collections.reverse( Arrays.asList(censusCSV));
-        Assert.assertEquals( "WB", censusCSV[censusCSV.length - 1].stateCode );
-    }*/
-
     //UC-5
     //TC-5.1
     @Test
@@ -218,16 +197,6 @@ public class CensusAnalyserTest {
         Assert.assertEquals( "Bihar", censusCSV[0].state );
     }
 
-    /*//UC-7
-    //TC-7.1
-    @Test
-    public void givenIndianCensusData_WhenSorted_ThenShouldReturnSortedArea() throws CensusAnalyserException {
-        CensusAnalyser censusAnalyser = new CensusAnalyser(Country.INDIA);
-        censusAnalyser.loadCensusData( CensusAnalyser.Country.INDIA,INDIA_CENSUS_CSV_FILE_PATH,INDIA_STATE_CODE_FILE_PATH);
-        String sortedCensusData = censusAnalyser.getStateWiseCensusData("area");
-        IndiaCensusCSV[] censusCSV = new Gson().fromJson( sortedCensusData, IndiaCensusCSV[].class );
-        Assert.assertEquals( "Rajasthan", censusCSV[0].state );
-    }*/
 
     //UC-8
     //TC-8.1
