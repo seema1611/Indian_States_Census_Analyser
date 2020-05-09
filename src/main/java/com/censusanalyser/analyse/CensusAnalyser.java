@@ -1,7 +1,6 @@
 package com.censusanalyser.analyse;
 
 import com.censusanalyser.dao.IndiaCensusDAO;
-import com.censusanalyser.exception.CSVBuilderException;
 import com.censusanalyser.exception.CensusAnalyserException;
 import com.censusanalyser.model.IndiaCensusCSV;
 import com.censusanalyser.model.IndiaStateCodeCSV;
@@ -14,6 +13,7 @@ import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+
 
 public class CensusAnalyser {
     HashMap<String, IndiaCensusDAO> censusMap;
@@ -56,7 +56,7 @@ public class CensusAnalyser {
             return censusList.size();
         } catch (RuntimeException e) {
             throw new CensusAnalyserException( e.getMessage(),
-                    CensusAnalyserException.ExceptionType.CSV_FILE_INTERNAL_ISSUES);
+                    CensusAnalyserException.ExceptionType.CSV_FILE_INTERNAL_ISSUES );
         } catch (IOException e) {
             throw new CensusAnalyserException( e.getMessage(),
                     CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM );
@@ -65,7 +65,7 @@ public class CensusAnalyser {
 
     public String getStateWiseCensusData() throws CensusAnalyserException {
         if (censusList == null || censusList.size() == 0) {
-            throw new CensusAnalyserException( "No Cenus Data", CensusAnalyserException.ExceptionType.NO_CENSUS_DATA );
+            throw new CensusAnalyserException( "No Census Data", CensusAnalyserException.ExceptionType.NO_CENSUS_DATA );
         }
         Comparator<IndiaCensusDAO> censusComparator = Comparator.comparing( census -> census.sortCode );
         this.sort( censusComparator );
