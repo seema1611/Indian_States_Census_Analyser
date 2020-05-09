@@ -201,4 +201,14 @@ public class CensusAnalyserTest {
         IndiaCensusCSV[] censusCSV = new Gson().fromJson( sortedCensusData, IndiaCensusCSV[].class );
         Assert.assertEquals( "Bihar", censusCSV[0].state );
     }
+
+    //UC-7
+    //TC-7.1
+    @Test
+    public void givenIndianCensusData_WhenSorted_ThenShouldReturnSortedArea() throws CensusAnalyserException {
+        censusAnalyser.loadIndiaCensusData( ConstantPaths.INDIA_CENSUS_CSV_FILE_PATH, "area" );
+        String sortedCensusData = censusAnalyser.getStateWiseCensusDataIntegerValues();
+        IndiaCensusCSV[] censusCSV = new Gson().fromJson( sortedCensusData, IndiaCensusCSV[].class );
+        Assert.assertEquals( "Rajasthan", censusCSV[0].state );
+    }
 }
