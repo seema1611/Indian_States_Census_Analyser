@@ -163,14 +163,14 @@ public class CensusAnalyserTest {
         Assert.assertEquals( "West Bengal", censusCSV[censusCSV.length - 1].state );
     }
 
-    //UC-4
+   /UC-4
     //TC-4.1
     @Test
     public void givenIndianStateCodeData_WhenSortedOnState_ShouldReturnStartSortedResult() throws CensusAnalyserException {
         censusAnalyser.loadIndianStateCode( ConstantPaths.INDIA_STATE_CODE_FILE_PATH );
         String sortedCensusData = censusAnalyser.getStateWiseCensusData();
         IndiaStateCodeCSV[] censusCSV = new Gson().fromJson( sortedCensusData, IndiaStateCodeCSV[].class );
-        Assert.assertEquals( "AN", censusCSV[0].stateCode );
+        Assert.assertEquals( "Andaman and Nicobar Islands", censusCSV[0].state );
     }
 
     //TC-4.2
@@ -179,6 +179,6 @@ public class CensusAnalyserTest {
         censusAnalyser.loadIndianStateCode( ConstantPaths.INDIA_STATE_CODE_FILE_PATH );
         String sortedCensusData = censusAnalyser.getStateWiseCensusData();
         IndiaStateCodeCSV[] censusCSV = new Gson().fromJson( sortedCensusData, IndiaStateCodeCSV[].class );
-        Assert.assertEquals( "WB", censusCSV[censusCSV.length - 1].stateCode );
+        Assert.assertEquals( "West Bengal", censusCSV[censusCSV.length - 1].state );
     }
 }
