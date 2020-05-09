@@ -182,6 +182,7 @@ public class CensusAnalyserTest {
         Assert.assertEquals( "West Bengal", censusCSV[censusCSV.length - 1].state );
     }
 
+    //UC-5
     //TC-5.1
     @Test
     public void givenIndianCensusCode_WhenSorted_ThenShouldReturnSortedPopulation() throws CensusAnalyserException {
@@ -189,5 +190,15 @@ public class CensusAnalyserTest {
         String sortedCensusData = censusAnalyser.getStateWiseCensusDataIntegerValues();
         IndiaCensusCSV[] censusCSV = new Gson().fromJson( sortedCensusData, IndiaCensusCSV[].class );
         Assert.assertEquals( "Uttar Pradesh", censusCSV[0].state );
+    }
+
+    //UC-6
+    //TC-6.1
+    @Test
+    public void givenIndianCensusData_WhenSorted_ThenShouldReturnSortedDensity() throws CensusAnalyserException {
+        censusAnalyser.loadIndiaCensusData( ConstantPaths.INDIA_CENSUS_CSV_FILE_PATH, "density" );
+        String sortedCensusData = censusAnalyser.getStateWiseCensusDataIntegerValues();
+        IndiaCensusCSV[] censusCSV = new Gson().fromJson( sortedCensusData, IndiaCensusCSV[].class );
+        Assert.assertEquals( "Bihar", censusCSV[0].state );
     }
 }
