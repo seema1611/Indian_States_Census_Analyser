@@ -1,6 +1,6 @@
 package com.censusanalyser.exception;
 
-public class CSVBuilderException extends Exception {
+public class CSVBuilderException extends RuntimeException {
     public ExceptionType type;
 
     public CSVBuilderException(String message, ExceptionType type) {
