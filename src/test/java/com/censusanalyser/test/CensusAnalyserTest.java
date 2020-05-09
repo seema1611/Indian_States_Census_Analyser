@@ -2,10 +2,10 @@ package com.censusanalyser.test;
 
 import com.censusanalyser.analyse.CensusAnalyser;
 import com.censusanalyser.analyse.ConstantPaths;
-import com.censusanalyser.exception.CSVBuilderException;
 import com.censusanalyser.exception.CensusAnalyserException;
 import com.censusanalyser.model.IndiaCensusCSV;
 import com.censusanalyser.model.IndiaStateCodeCSV;
+import com.censusanalyser.model.USCensusCSV;
 import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Before;
@@ -217,5 +217,18 @@ public class CensusAnalyserTest {
         String sortedCensusData = censusAnalyser.getStateWiseCensusData("area");
         IndiaCensusCSV[] censusCSV = new Gson().fromJson( sortedCensusData, IndiaCensusCSV[].class );
         Assert.assertEquals( "Rajasthan", censusCSV[0].state );
+    }
+
+    //UC-8
+    //TC-8.1
+    @Test
+    public void givenUSCensus_CSVFile_ReturnsCorrectRecords()  {
+        try
+        {
+            int numOfRecords = censusAnalyser.loadCensusData( ConstantPaths.US_CENSUS_CSV_FILE_PATH, USCensusCSV.class );
+            Assert.assertEquals( 51, numOfRecords );
+        } catch (CensusAnalyserException e) {
+            e.printStackTrace();
+        }
     }
 }
